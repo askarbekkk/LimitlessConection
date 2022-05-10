@@ -62,7 +62,7 @@ const Preload:FC<Props> = (props:Props) => {
                         {props.title}
                     </Typography>
                 ) : (
-                    <img className={styles.logo} src={require('../public/images/logo.svg')}  alt={""}/>
+                    <img className={styles.logo} src={require('../assets/images/lcLogoNew.svg')}  alt={""}/>
                 )}
             </Box>
         </Box>
