@@ -15,6 +15,7 @@ import PreviewWithValue from "../components/pages/get-card/PreviewWithValue";
 import BlueButton from "../components/BlueButton";
 import PreviewWithValueInput from "../components/pages/get-card/PreviewWithValue/input";
 import Loading from "../components/Form/Loading";
+
 // @ts-ignore
 import hex2rgba from "hex2rgba";
 // @ts-ignore
@@ -135,10 +136,13 @@ const useStyles = makeStyles((theme: Theme) => ({
     inputData: {
         width: "405px",
         textAlign: 'center',
+        background :"rgba(94, 94, 94, 0.41)",
         padding: "10px",
-        color: '#8C8B8B',
+        color: '#FFFFFF',
+        border: "none",
         margin: "10px",
         fontWeight: '300',
+        borderRadius: "3px",
         fontSize: "16px",
         fontFamily: "sans-serif",
         outline: 'red',
@@ -148,6 +152,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         width: "405px",
         textAlign: 'center',
         padding: "10px",
+        borderRadius: "3px",
+        border: "none",
+        background :"rgba(94, 94, 94, 0.41)",
         color: 'red',
         margin: "10px",
         fontWeight: '300',
@@ -156,7 +163,7 @@ const useStyles = makeStyles((theme: Theme) => ({
         outline: 'red',
         resize: "vertical",
         borderBottom: "2px solid red",
-        boxShadow: "0px 0px 15px red"
+        boxShadow: "0px -1px 5px red"
     },
     inputDataBox: {
         textAlign: "center",
@@ -182,6 +189,9 @@ const useStyles = makeStyles((theme: Theme) => ({
         width: "100%",
         textAlign: 'center',
         padding: "10px",
+        background :"rgba(94, 94, 94, 0.41)",
+        border: "none",
+        borderRadius: "5px",
         color: '#8C8B8B',
         margin: "10px",
         fontWeight: '300',
@@ -239,6 +249,29 @@ const useStyles = makeStyles((theme: Theme) => ({
         },
         [theme.breakpoints.up('xl')]: {
             width: "100%",
+
+        }
+    },
+    cardsSlider: {
+        display: "flex",
+        justifyContent: "space-between",
+        flexWrap :"wrap",
+        [theme.breakpoints.up('xs')]: {
+            justifyContent: "center",
+
+        },
+        [theme.breakpoints.up('md')]: {
+            justifyContent: "space-around",
+
+
+        },
+        [theme.breakpoints.up('lg')]: {
+            justifyContent: "space-between",
+
+
+        },
+        [theme.breakpoints.up('xl')]: {
+            justifyContent: "space-between",
 
         }
     },
@@ -359,7 +392,7 @@ const GetCard: NextPage = () => {
             }
             if (cardState.cards.length) {
                 return (
-                    <Box sx={{width: '100%', position: 'relative'}}>
+                    <Box sx={{width: '100%', position: 'relative', background: "radial-gradient(43.37% 43.37% at 49.93% 50.07%, rgba(214, 166, 36, 0.31) 0%, rgba(196, 196, 196, 0) 100%)", filter: "drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)) drop-shadow(5px 5px 107px rgba(255, 255, 255, 0.25))"}}>
                         <IconButton className={clsx(styles.sliderArrows, styles.prevArrow)} onClick={handlePrevSlider}>
                             <ArrowBackIos className={styles.sliderIcon}/>
                         </IconButton>
@@ -490,10 +523,10 @@ const GetCard: NextPage = () => {
                                         </IconButton>
                                     </Box>
                                 </Box>
-                                <Box className={styles.cardSelectTop} sx={{color: "black"}}>
+                                <Box className={styles.cardSelectTop} sx={{color: "white"}}>
                                     {cardState.cards[index][`title`]}
                                 </Box>
-                                <Typography fontSize={media(17, 20)} fontWeight="600" color="black">
+                                <Typography fontSize={media(17, 20)} fontWeight="600" color="white">
                                     {cardState.cards[index][`price_dollar`]} {currenciesTitle['dollar']}
                                 </Typography>
                             </Box>
@@ -548,9 +581,15 @@ const GetCard: NextPage = () => {
             })
     };
 
+
     return (
         <MainLayout>
-            <div style={{background: 'white'}}>
+
+            <div style={{
+                minHeight: "85vh",
+                background: `url(${require("../assets/images/lcBG.png")}) #181818 no-repeat center/cover`,
+                paddingTop: media(40, 80),
+                boxShadow: "inset 0em -1em 1em #181818"}}>
                 <Container maxWidth="md" className={styles.container}>
                     {!isOrdered && (
                         <>
@@ -623,7 +662,7 @@ const GetCard: NextPage = () => {
             </div>
             {authState.uploadCard.length > 0 &&
                 <>
-                    <Box style={{background: 'black', padding: '30px 20px'}}>
+                    <Box style={{background: '#181818', padding: '30px 20px'}}>
                         <Box style={{textAlign: "center", padding: "30px 0"}}>
                             <svg width="239" height="14" viewBox="0 0 239 14" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
@@ -679,28 +718,30 @@ const GetCard: NextPage = () => {
                                 </defs>
                             </svg>
                         </Box>
-                        <Container maxWidth="md" style={{background: 'white', padding: '20px'}}>
-                            {authState.uploadCard.map((items: any) => (
-                                <>
-                                    <Box style={{
-                                        display: "flex",
-                                        flexWrap: "wrap",
-                                        alignItems: "center",
-                                        margin: '15px 0',
-                                        borderBottom: "2px solid #D0D0D0",
-                                        paddingBottom: "10px"
-                                    }}>
-                                        <img src={items.card.image} alt="" style={{width: media(240, 300)}}/>
-                                        <Box style={{margin: `0 ${media(0, 20)}`, width: "120px"}}>
-                                            <Typography>{items.card.title}</Typography>
-                                            <Typography>{items.count} piece</Typography>
-                                            <Typography>{items.card.price_dollar} $</Typography>
-                                            <Typography>Total: {items.card.price_dollar * items.count} $</Typography>
+                        <Container maxWidth="lg" style={{background: '#444444', padding: '20px'}}>
+                            <Box className={styles.cardsSlider}>
+                                {authState.uploadCard.map((items: any) => (
+                                    <>
+                                        <Box style={{
+                                            textAlign: "center",
+                                            margin: '15px 10px',
+                                            padding: "10px",
+                                            borderRadius: "5px",
+                                            background : "rgba(24,24,24,0.56)"
+                                        }}>
+                                            <img src={items.card.image} alt="" style={{width: media(240, 300)}}/>
+                                            <Box style={{margin: `0 ${media(0, 20)}`, color: "white"}}>
+                                                <Typography>{items.card.title}</Typography>
+                                                <Typography>{items.count} piece</Typography>
+                                                <Typography>{items.card.price_dollar} $</Typography>
+                                                {/*<Typography>Total: {items.card.price_dollar * items.count} $</Typography>*/}
+                                            </Box>
                                         </Box>
-                                    </Box>
-                                </>
-                            ))}
-                            <Box style={{textAlign: 'center'}}>
+                                    </>
+                                ))}
+                            </Box>
+
+                            <Box style={{textAlign: 'center', color: "white"}}>
                                 <h4>TOTAL AMOUNT</h4>
                                 <h3>{price} $</h3>
                             </Box>

@@ -15,7 +15,24 @@ const useStyles = makeStyles((theme: Theme) => ({
         display: "flex",
         justifyContent: 'space-between',
         alignItems: 'center',
-        flexWrap :"wrap"
+        flexWrap :"wrap",
+        [theme.breakpoints.up('xs')]: {
+            justifyContent: 'center',
+
+        },
+        [theme.breakpoints.up('md')]: {
+            justifyContent: 'space-between',
+
+
+        },
+        [theme.breakpoints.up('lg')]: {
+            justifyContent: 'space-between',
+
+
+        },
+        [theme.breakpoints.up('xl')]: {
+            justifyContent: 'space-between',
+        }
     },
     list: {},
     listItem: {
